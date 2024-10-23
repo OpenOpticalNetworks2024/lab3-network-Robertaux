@@ -85,10 +85,10 @@ class Node:
         self._successive=val_s
 
     def propagate(self, signal_info, node):
-        signal_info.update_path(node)
+        signal_info.update_path_c()
         if node in self._successive:
-            self._successive[node].propagate(signal_info, node)
-            signal_info.update_path_c()
+            line_label=self.label+signal_info.path(0)
+            self._successive[line_label].propagate(signal_info, node)
 
 class Line:
     def __init__(self, label, length):

@@ -28,6 +28,6 @@ def create_dataframe(network, signal_power_w):
                     path_string="->".join(path)
                     total_latency, total_noise_power, total_snr_db=values_computed(network, path, signal_power_w)
                     all_paths_data.append([path_string, total_latency, total_noise_power, total_snr_db])
-    columns=["Path", "Total Latency (s)", "Total Noise Power (W)", "SNR (dB)"]
+    columns=["Path"  , "      Total Latency (s)"  , "    Total Noise Power (W)  "  , "  SNR (dB)  "]
     paths_df=pd.DataFrame(all_paths_data, columns=columns)
     return paths_df
