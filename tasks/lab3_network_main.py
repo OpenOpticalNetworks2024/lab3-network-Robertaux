@@ -16,7 +16,7 @@ file_input=INPUT_FOLDER/'nodes.json'
 if __name__ == '__main__':
     network=Network(file_input)
     source='A'
-    destination='C'
+    destination='F'
     paths=network.find_paths(source,destination)
     print(f"Paths between {source} and {destination}: {paths}")
     print('Pandas Dataframe:')
