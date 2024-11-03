@@ -159,7 +159,7 @@ class Network:
 
     def connect(self):
         for node in self.nodes.values():
-            node.successive={label: self.nodes[label] for label in node.connected_nodes}
+            node.successive={line.label: line for line in node.connected_nodes}
         for line in self.lines.values():
             node_labels=list(line.label)
             line.successive={node_labels[0]: self.nodes[node_labels[0]], node_labels[1]: self.nodes[node_labels[1]]}
@@ -204,7 +204,7 @@ class Network:
             plt.plot([x1, x2], [y1, y2], linestyle='--', color='black')
             mid_x=(x1+x2)/2
             mid_y=(y1+y2)/2
-            distance=round(line.length, 2)
+            distance=round(line.length, 5)
             plt.text(mid_x, mid_y, str(distance), horizontalalignment='center', verticalalignment='center')
         plt.xlabel('X')
         plt.ylabel('Y')

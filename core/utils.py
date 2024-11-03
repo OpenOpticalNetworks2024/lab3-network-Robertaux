@@ -6,9 +6,8 @@ def values_computed(network, path, signal_power):
     total_latency=0.0
     total_noise_power=0.0
     snr=0
-    for i in range(len(path)-1):
-        current_label=path[i]
-        next_label=path[i+1]
+    for current_label, next_label in zip(path, path[1:]):
+        line_label = current_label + next_label
         line_label=current_label+next_label
         line=network.lines.get(line_label)
         if line:
@@ -19,7 +18,7 @@ def values_computed(network, path, signal_power):
     return total_latency, total_noise_power, total_snr_db
 
 def create_dataframe(network, signal_power_w):
-    all_paths_data=[]
+    results=[]
     for source_label in network.nodes:
         for destination_label in network.nodes:
             if source_label!=destination_label:
@@ -27,7 +26,7 @@ def create_dataframe(network, signal_power_w):
                 for path in paths:
                     path_string="->".join(path)
                     total_latency, total_noise_power, total_snr_db=values_computed(network, path, signal_power_w)
-                    all_paths_data.append([path_string, total_latency, total_noise_power, total_snr_db])
+                    results.append([path_string, total_latency, total_noise_power, total_snr_db])
     columns=["Path"  , "      Total Latency (s)"  , "    Total Noise Power (W)  "  , "  SNR (dB)  "]
-    paths_df=pd.DataFrame(all_paths_data, columns=columns)
+    paths_df=pd.DataFrame(results, columns=columns)
     return paths_df
