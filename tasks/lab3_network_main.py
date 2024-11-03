@@ -23,5 +23,5 @@ if __name__ == '__main__':
     paths_df=create_dataframe(network,signal_power_w=0.001)
     print(paths_df)
     network.draw()
-    print('End of the simulation')
     paths_df.to_csv('weighted_path.csv', index=False)
+    print('End of the simulation')
