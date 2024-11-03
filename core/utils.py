@@ -7,7 +7,6 @@ def values_computed(network, path, signal_power):
     total_noise_power=0.0
     snr=0
     for current_label, next_label in zip(path, path[1:]):
-        line_label = current_label + next_label
         line_label=current_label+next_label
         line=network.lines.get(line_label)
         if line:
